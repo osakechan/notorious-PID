@@ -4,7 +4,7 @@ PID fermentation control for AVR platforms
 
 notorious PID is an open source fermentation temperature control program for homebrew use.  The code has been developed with the arduino IDE.
 
-###Contents
+### Contents
 
 - [Control Overview](https://github.com/osakechan/notoriousPID#control-overview)
 - [LCD Character Display](https://github.com/osakechan/notoriousPID#lcd-character-display)
@@ -19,15 +19,15 @@ notorious PID is an open source fermentation temperature control program for hom
 - [Power Schematic](https://github.com/osakechan/notoriousPID#power-schematic)
 - [Build Photos](https://github.com/osakechan/notoriousPID#build-photos)
 
-###Control Overview
+### Control Overview
 A standard PID control algorithm computes the air temperature necessary to maintain a desired fermentation setpoint. Controller output of the main PID cascades into two additional control algorithms for heating and cooling.  Final control elements consist of the refrigerator compressor and resistive heating element.  Temperature sensing of fermenting beer and chamber air is performed by the Dallas OneWire DS18B20.  The sensor's on-board DAC performs a conversion to deg C with up to 12-bit resolution (requiring approximately 650ms for conversion at room temperature).  With careful tuning of control parameters, energy efficient, precision control of desired fermentation setpoint within +/- 0.1 deg C is possible.
 
 **Cooling** --  The refrigerator compressor is switched by a differential control algorithm with time-based overshoot prediction capabilities.  Cycles are timed to minimize compressor motor stress.
 
 **Heating** --  A second PID instance outputs a duty cycle for time proportioned control of a resistive heating element lining the inner chamber walls.
 
-###LCD Character Display
-#####*Main Display*
+### LCD Character Display
+##### *Main Display*
 [![main page 1](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/LCD/nPIDpage1_small.jpg)](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/LCD/nPIDpage1.jpg "page 1")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![main page 2](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/LCD/nPIDpage2_small.jpg)](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/LCD/nPIDpage2.jpg "page 2")
 
 [![main page 3](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/LCD/nPIDpage3_small.jpg)](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/LCD/nPIDpage3.jpg "page 3")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![main page 4](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/LCD/nPIDpage4_small.jpg)](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/LCD/nPIDpage4.jpg "page 4")
@@ -39,7 +39,7 @@ The main display is divided amongst 4 pages.  A scroll bar on the bottom line of
 - fridge state - (I)dling | (C)ooling | (H)eating
 - sd status
 
-#####*User Menu*
+##### *User Menu*
 [![menu root](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/LCD/nPIDmenu_small.jpg)](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/LCD/nPIDmenu.jpg "menu")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![menu unit](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/LCD/nPIDmenuUNIT_small.jpg)](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/LCD/nPIDmenuUNIT.jpg "display units")
 
 [![menu profile](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/LCD/nPIDmenuPGM_small.jpg)](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/LCD/nPIDmenuPGM.jpg "temperature profiles")
@@ -56,7 +56,7 @@ Pressing the rotary encoder pushbutton activates the user menu.  Normal PID and 
 - restore & reset - restore EEPROM settings to defaults and reset AVR
 - back - finalize setting changes and leave user menu
 
-###Additonal Features
+### Additonal Features
   **EEPROM storage** -- notorious PID stores vital program states and settings in non-volatile EEPROM memory space.  If power is lost or the arduino reboots via the reset button, previous settings can be recalled from EEPROM at startup.
 
   **Data Logging** -- Logging functionality is provided by the Adafruit data logging shield.  The shield includes an SD card slot and a real time clock for accurate timestamping of data and files.  Logfiles are formatted as simple CSV with headers.  Logging operations may be enabled/disabled by the end user at any time via the menu.
@@ -65,11 +65,11 @@ Pressing the rotary encoder pushbutton activates the user menu.  Normal PID and 
   
   **Watchdog Failsafe** -- An infinite loop or other AVR lock-up could lead to a loss of control of the final control elements.  To prevent an AVR failure from leading to unsafe operation, notorious PID makes use of the Watchdog timer feature of arduino (and similar) boards.  The Watchdog is an onboard countdown timer that will reboot the arduino if it has not recieved a reset pulse from the AVR within a set time.
   
-###Future Features
+### Future Features
   **WiFi Connectivity** -- Connectivity to be acomplished via the Adafruit wifi breakout with external antenna.  Data will be viewable online via the Xively service.
 
-###Build Aspects
-#####*List of Components*
+### Build Aspects
+##### *List of Components*
 - [Arduino MEGA 2560](http://arduino.cc/en/Main/arduinoBoardMega2560)
 - [Adafruit data logging shield](http://www.adafruit.com/product/1141)
 - [20x4 character LCD](http://www.adafruit.com/product/198)
@@ -80,7 +80,7 @@ Pressing the rotary encoder pushbutton activates the user menu.  Normal PID and 
 - [A refrigerator or chest freezer](http://www.craigslist.org/about/sites)
 - [Flexwatt heat tape](http://www.calorique.com/en/flexwatt-heat-tape/)
 
-#####*Logical Connections*
+##### *Logical Connections*
 | Hardware | AVR Pin |   | Hardware | AVR Pin |
 |---|---|---|---|---|
 | LCD Enable | 8 |   | Rotary A Channel | 3 |
@@ -94,7 +94,7 @@ Pressing the rotary encoder pushbutton activates the user menu.  Normal PID and 
 | LCD D5 | 6 |   |   |   |
 | LCD D4 | 7 |   |   |   |
 
-#####*Logical Schematic*
+##### *Logical Schematic*
 ![nPID logic wiring](https://raw.githubusercontent.com/osakechan/notorious-PID/master/img/nPID%20wiring%20layout.png)
 
 *a couple notes about the above diagram:*
@@ -106,7 +106,7 @@ Pressing the rotary encoder pushbutton activates the user menu.  Normal PID and 
 - external power *must* be supplied to the onewire sensors (cannot use parasite power)
 - there is no template for the sainsmart relay board but wiring should be straight-forward
 
-#####*Power Schematic*
+##### *Power Schematic*
 ![nPID power wiring](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/nPid%20power%20layout.png)
 
 *a couple notes about the above diagram:*
@@ -115,7 +115,7 @@ Pressing the rotary encoder pushbutton activates the user menu.  Normal PID and 
 - plug heat element into *heating* outlet (duh)
 - plug arduino (and optional fans, etc.) into *mains* outlet
 
-#####*Build Photos*
+##### *Build Photos*
 [![chamber & controller](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/BUILD/chamber_controller_thumb.jpg)](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/BUILD/chamber_controller.jpg)&nbsp;&nbsp;&nbsp;&nbsp;[![controller](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/BUILD/controller_thumb.jpg)](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/BUILD/controller.jpg)&nbsp;&nbsp;&nbsp;&nbsp;[![inside chamber view 1](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/BUILD/inside_chamber1_thumb.jpg)](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/BUILD/inside_chamber1.jpg)&nbsp;&nbsp;&nbsp;&nbsp;[![inside chamber view 2](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/BUILD/inside_chamber2_thumb.jpg)](https://raw.githubusercontent.com/osakechan/notoriousPID/master/img/BUILD/inside_chamber2.jpg)
 
 -----------------------
